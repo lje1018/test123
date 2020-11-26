@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[22],{pG2o:function(n,e,t){"use strict";t.r(e);var o=t("q1tI"),c=t.n(o),f=t("GN+H"),i=t("s68/");e.default=function(){return Object(o.useEffect)((function(){window.location.href=f.f?i.f.KO:i.f.EN})),c.a.createElement("div",null)}}}]);
+//# sourceMappingURL=component---src-templates-weekly-pick-redirection-tsx-54195f3217b8369b9ac1.js.map
