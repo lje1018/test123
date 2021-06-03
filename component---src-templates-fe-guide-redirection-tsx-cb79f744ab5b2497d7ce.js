@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[19],{SAqk:function(n,e,t){"use strict";t.r(e);var c=t("q1tI"),o=t.n(c),i=t("GN+H"),u=t("s68/");e.default=function(){return Object(c.useEffect)((function(){window.location.href=i.f?u.d.KO:u.d.EN})),o.a.createElement("div",null)}}}]);
-//# sourceMappingURL=component---src-templates-fe-guide-redirection-tsx-cb79f744ab5b2497d7ce.js.map
