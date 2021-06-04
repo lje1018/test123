@@ -1206,9 +1206,9 @@ body > textarea {
 .tie-text-effect-button .tui-image-editor-button.active svg > use.active {
   display: block;
 }
-.tie-text-align-button.left .tui-image-editor-button.left svg > use.active,
-.tie-text-align-button.center .tui-image-editor-button.center svg > use.active,
-.tie-text-align-button.right .tui-image-editor-button.right svg > use.active {
+.tie-text-align-button.tie-text-align-left .tui-image-editor-button.left svg > use.active,
+.tie-text-align-button.tie-text-align-center .tui-image-editor-button.center svg > use.active,
+.tie-text-align-button.tie-text-align-right .tui-image-editor-button.right svg > use.active {
   display: block;
 }
 .tie-mask-image-file,

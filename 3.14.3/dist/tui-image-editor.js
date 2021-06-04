@@ -4230,7 +4230,7 @@ exports.default = {
         _this12.activeObjectId = null;
         if (_this12.ui.submenu === 'text') {
           _this12.changeCursor('text');
-        } else if (!['draw', 'crop', 'resize'].includes(_this12.ui.submenu)) {
+        } else if (!(0, _util.includes)(['draw', 'crop', 'resize'], _this12.ui.submenu)) {
           _this12.stopDrawingMode();
         }
       }
@@ -8942,7 +8942,7 @@ var Shape = function (_Component) {
           top = shapeObj.top;
 
 
-      activeSelection.realizeTransform(shapeObj);
+      _fabric2.default.util.addTransformToObject(shapeObj, activeSelection.calcTransformMatrix());
       this._resetPositionFillFilter(shapeObj);
 
       shapeObj.set({
@@ -9013,7 +9013,7 @@ var resetStyles = {
   fill: '#000000',
   fontStyle: 'normal',
   fontWeight: 'normal',
-  textAlign: 'left',
+  textAlign: 'tie-text-align-left',
   underline: false
 };
 var DBCLICK_TIME = 500;
@@ -16175,16 +16175,15 @@ exports.makeSelectionUndoDatum = makeSelectionUndoDatum;
 
 var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
 
+var _fabric = __webpack_require__(/*! fabric */ "fabric");
+
+var _fabric2 = _interopRequireDefault(_fabric);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * Cached selection's info
  * @type {Array}
- * @private
- */
-var cachedUndoDataForChangeDimension = null;
-
-/**
- * Set cached undo data
- * @param {Array} undoData - selection object
  * @private
  */
 /**
@@ -16192,6 +16191,13 @@ var cachedUndoDataForChangeDimension = null;
  * @fileoverview Selection modification helper
  */
 
+var cachedUndoDataForChangeDimension = null;
+
+/**
+ * Set cached undo data
+ * @param {Array} undoData - selection object
+ * @private
+ */
 function setCachedUndoDataForDimension(undoData) {
   cachedUndoDataForChangeDimension = undoData;
 }
@@ -16226,12 +16232,7 @@ function makeSelectionUndoData(obj, undoDatumMaker) {
           height = item.height;
 
 
-      console.log('own!', item.calcOwnMatrix());
-      console.log('transform!', item.calcTransformMatrix());
-      console.log('obj own!', obj.calcOwnMatrix());
-      console.log('obj transform!', obj.calcTransformMatrix());
-      fabric.util.addTransformToObject(item, obj.calcTransformMatrix());
-      // obj.realizeTransform(item, obj.calcTransformMatrix());
+      _fabric2.default.util.addTransformToObject(item, obj.calcTransformMatrix());
       var result = undoDatumMaker(item);
 
       item.set({
@@ -24981,7 +24982,7 @@ exports.default = function (_ref) {
         biSize = _ref.biSize,
         menuIconStyle = _ref.menuIconStyle,
         submenuIconStyle = _ref.submenuIconStyle;
-    return "\n    .tie-icon-add-button.icon-bubble .tui-image-editor-button[data-icontype=\"icon-bubble\"] label,\n    .tie-icon-add-button.icon-heart .tui-image-editor-button[data-icontype=\"icon-heart\"] label,\n    .tie-icon-add-button.icon-location .tui-image-editor-button[data-icontype=\"icon-location\"] label,\n    .tie-icon-add-button.icon-polygon .tui-image-editor-button[data-icontype=\"icon-polygon\"] label,\n    .tie-icon-add-button.icon-star .tui-image-editor-button[data-icontype=\"icon-star\"] label,\n    .tie-icon-add-button.icon-star-2 .tui-image-editor-button[data-icontype=\"icon-star-2\"] label,\n    .tie-icon-add-button.icon-arrow-3 .tui-image-editor-button[data-icontype=\"icon-arrow-3\"] label,\n    .tie-icon-add-button.icon-arrow-2 .tui-image-editor-button[data-icontype=\"icon-arrow-2\"] label,\n    .tie-icon-add-button.icon-arrow .tui-image-editor-button[data-icontype=\"icon-arrow\"] label,\n    .tie-icon-add-button.icon-bubble .tui-image-editor-button[data-icontype=\"icon-bubble\"] label,\n    .tie-draw-line-select-button.line .tui-image-editor-button.line label,\n    .tie-draw-line-select-button.free .tui-image-editor-button.free label,\n    .tie-flip-button.flipX .tui-image-editor-button.flipX label,\n    .tie-flip-button.flipY .tui-image-editor-button.flipY label,\n    .tie-flip-button.resetFlip .tui-image-editor-button.resetFlip label,\n    .tie-crop-button .tui-image-editor-button.apply.active label,\n    .tie-crop-preset-button .tui-image-editor-button.preset.active label,\n    .tie-resize-button .tui-image-editor-button.apply.active label,\n    .tie-resize-preset-button .tui-image-editor-button.preset.active label,\n    .tie-shape-button.rect .tui-image-editor-button.rect label,\n    .tie-shape-button.circle .tui-image-editor-button.circle label,\n    .tie-shape-button.triangle .tui-image-editor-button.triangle label,\n    .tie-text-effect-button .tui-image-editor-button.active label,\n    .tie-text-align-button.left .tui-image-editor-button.left label,\n    .tie-text-align-button.center .tui-image-editor-button.center label,\n    .tie-text-align-button.right .tui-image-editor-button.right label,\n    .tie-mask-apply.apply.active .tui-image-editor-button.apply label,\n    .tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-button:hover > label,\n    .tui-image-editor-container .tui-image-editor-checkbox label > span {\n        " + subMenuLabelActive + "\n    }\n    .tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-button > label,\n    .tui-image-editor-container .tui-image-editor-range-wrap.tui-image-editor-newline.short label,\n    .tui-image-editor-container .tui-image-editor-range-wrap.tui-image-editor-newline.short label > span {\n        " + subMenuLabelNormal + "\n    }\n    .tui-image-editor-container .tui-image-editor-range-wrap label > span {\n        " + subMenuRangeTitle + "\n    }\n    .tui-image-editor-container .tui-image-editor-partition > div {\n        " + submenuPartitionVertical + "\n    }\n    .tui-image-editor-container.left .tui-image-editor-submenu .tui-image-editor-partition > div,\n    .tui-image-editor-container.right .tui-image-editor-submenu .tui-image-editor-partition > div {\n        " + submenuPartitionHorizontal + "\n    }\n    .tui-image-editor-container .tui-image-editor-checkbox label > span:before {\n        " + submenuCheckbox + "\n    }\n    .tui-image-editor-container .tui-image-editor-checkbox label > input:checked + span:before {\n        border: 0;\n    }\n    .tui-image-editor-container .tui-image-editor-virtual-range-pointer {\n        " + submenuRangePointer + "\n    }\n    .tui-image-editor-container .tui-image-editor-virtual-range-bar {\n        " + submenuRangeBar + "\n    }\n    .tui-image-editor-container .tui-image-editor-virtual-range-subbar {\n        " + submenuRangeSubbar + "\n    }\n    .tui-image-editor-container .tui-image-editor-disabled .tui-image-editor-virtual-range-pointer {\n        " + submenuDisabledRangePointer + "\n    }\n    .tui-image-editor-container .tui-image-editor-disabled .tui-image-editor-virtual-range-subbar {\n        " + submenuDisabledRangeSubbar + "\n    }\n    .tui-image-editor-container .tui-image-editor-disabled .tui-image-editor-virtual-range-bar {\n        " + submenuDisabledRangeBar + "\n    }\n    .tui-image-editor-container .tui-image-editor-range-value {\n        " + submenuRangeValue + "\n    }\n    .tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-button .color-picker-value + label {\n        " + submenuColorpickerTitle + "\n    }\n    .tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-button .color-picker-value {\n        " + submenuColorpickerButton + "\n    }\n    .tui-image-editor-container .svg_ic-menu {\n        " + menuIconSize + "\n    }\n    .tui-image-editor-container .svg_ic-submenu {\n        " + submenuIconSize + "\n    }\n    .tui-image-editor-container .tui-image-editor-controls-logo > img,\n    .tui-image-editor-container .tui-image-editor-header-logo > img {\n        " + biSize + "\n    }\n    .tui-image-editor-menu use.normal.use-default,\n    .tui-image-editor-help-menu use.normal.use-default {\n        fill-rule: evenodd;\n        fill: " + menuIconStyle.normal.color + ";\n        stroke: " + menuIconStyle.normal.color + ";\n    }\n    .tui-image-editor-menu use.active.use-default,\n    .tui-image-editor-help-menu use.active.use-default {\n        fill-rule: evenodd;\n        fill: " + menuIconStyle.active.color + ";\n        stroke: " + menuIconStyle.active.color + ";\n    }\n    .tui-image-editor-menu use.hover.use-default,\n    .tui-image-editor-help-menu use.hover.use-default {\n        fill-rule: evenodd;\n        fill: " + menuIconStyle.hover.color + ";\n        stroke: " + menuIconStyle.hover.color + ";\n    }\n    .tui-image-editor-menu use.disabled.use-default,\n    .tui-image-editor-help-menu use.disabled.use-default {\n        fill-rule: evenodd;\n        fill: " + menuIconStyle.disabled.color + ";\n        stroke: " + menuIconStyle.disabled.color + ";\n    }\n    .tui-image-editor-submenu use.normal.use-default {\n        fill-rule: evenodd;\n        fill: " + submenuIconStyle.normal.color + ";\n        stroke: " + submenuIconStyle.normal.color + ";\n    }\n    .tui-image-editor-submenu use.active.use-default {\n        fill-rule: evenodd;\n        fill: " + submenuIconStyle.active.color + ";\n        stroke: " + submenuIconStyle.active.color + ";\n    }\n";
+    return "\n    .tie-icon-add-button.icon-bubble .tui-image-editor-button[data-icontype=\"icon-bubble\"] label,\n    .tie-icon-add-button.icon-heart .tui-image-editor-button[data-icontype=\"icon-heart\"] label,\n    .tie-icon-add-button.icon-location .tui-image-editor-button[data-icontype=\"icon-location\"] label,\n    .tie-icon-add-button.icon-polygon .tui-image-editor-button[data-icontype=\"icon-polygon\"] label,\n    .tie-icon-add-button.icon-star .tui-image-editor-button[data-icontype=\"icon-star\"] label,\n    .tie-icon-add-button.icon-star-2 .tui-image-editor-button[data-icontype=\"icon-star-2\"] label,\n    .tie-icon-add-button.icon-arrow-3 .tui-image-editor-button[data-icontype=\"icon-arrow-3\"] label,\n    .tie-icon-add-button.icon-arrow-2 .tui-image-editor-button[data-icontype=\"icon-arrow-2\"] label,\n    .tie-icon-add-button.icon-arrow .tui-image-editor-button[data-icontype=\"icon-arrow\"] label,\n    .tie-icon-add-button.icon-bubble .tui-image-editor-button[data-icontype=\"icon-bubble\"] label,\n    .tie-draw-line-select-button.line .tui-image-editor-button.line label,\n    .tie-draw-line-select-button.free .tui-image-editor-button.free label,\n    .tie-flip-button.flipX .tui-image-editor-button.flipX label,\n    .tie-flip-button.flipY .tui-image-editor-button.flipY label,\n    .tie-flip-button.resetFlip .tui-image-editor-button.resetFlip label,\n    .tie-crop-button .tui-image-editor-button.apply.active label,\n    .tie-crop-preset-button .tui-image-editor-button.preset.active label,\n    .tie-resize-button .tui-image-editor-button.apply.active label,\n    .tie-resize-preset-button .tui-image-editor-button.preset.active label,\n    .tie-shape-button.rect .tui-image-editor-button.rect label,\n    .tie-shape-button.circle .tui-image-editor-button.circle label,\n    .tie-shape-button.triangle .tui-image-editor-button.triangle label,\n    .tie-text-effect-button .tui-image-editor-button.active label,\n    .tie-text-align-button.tie-text-align-left .tui-image-editor-button.left label,\n    .tie-text-align-button.tie-text-align-center .tui-image-editor-button.center label,\n    .tie-text-align-button.tie-text-align-right .tui-image-editor-button.right label,\n    .tie-mask-apply.apply.active .tui-image-editor-button.apply label,\n    .tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-button:hover > label,\n    .tui-image-editor-container .tui-image-editor-checkbox label > span {\n        " + subMenuLabelActive + "\n    }\n    .tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-button > label,\n    .tui-image-editor-container .tui-image-editor-range-wrap.tui-image-editor-newline.short label,\n    .tui-image-editor-container .tui-image-editor-range-wrap.tui-image-editor-newline.short label > span {\n        " + subMenuLabelNormal + "\n    }\n    .tui-image-editor-container .tui-image-editor-range-wrap label > span {\n        " + subMenuRangeTitle + "\n    }\n    .tui-image-editor-container .tui-image-editor-partition > div {\n        " + submenuPartitionVertical + "\n    }\n    .tui-image-editor-container.left .tui-image-editor-submenu .tui-image-editor-partition > div,\n    .tui-image-editor-container.right .tui-image-editor-submenu .tui-image-editor-partition > div {\n        " + submenuPartitionHorizontal + "\n    }\n    .tui-image-editor-container .tui-image-editor-checkbox label > span:before {\n        " + submenuCheckbox + "\n    }\n    .tui-image-editor-container .tui-image-editor-checkbox label > input:checked + span:before {\n        border: 0;\n    }\n    .tui-image-editor-container .tui-image-editor-virtual-range-pointer {\n        " + submenuRangePointer + "\n    }\n    .tui-image-editor-container .tui-image-editor-virtual-range-bar {\n        " + submenuRangeBar + "\n    }\n    .tui-image-editor-container .tui-image-editor-virtual-range-subbar {\n        " + submenuRangeSubbar + "\n    }\n    .tui-image-editor-container .tui-image-editor-disabled .tui-image-editor-virtual-range-pointer {\n        " + submenuDisabledRangePointer + "\n    }\n    .tui-image-editor-container .tui-image-editor-disabled .tui-image-editor-virtual-range-subbar {\n        " + submenuDisabledRangeSubbar + "\n    }\n    .tui-image-editor-container .tui-image-editor-disabled .tui-image-editor-virtual-range-bar {\n        " + submenuDisabledRangeBar + "\n    }\n    .tui-image-editor-container .tui-image-editor-range-value {\n        " + submenuRangeValue + "\n    }\n    .tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-button .color-picker-value + label {\n        " + submenuColorpickerTitle + "\n    }\n    .tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-button .color-picker-value {\n        " + submenuColorpickerButton + "\n    }\n    .tui-image-editor-container .svg_ic-menu {\n        " + menuIconSize + "\n    }\n    .tui-image-editor-container .svg_ic-submenu {\n        " + submenuIconSize + "\n    }\n    .tui-image-editor-container .tui-image-editor-controls-logo > img,\n    .tui-image-editor-container .tui-image-editor-header-logo > img {\n        " + biSize + "\n    }\n    .tui-image-editor-menu use.normal.use-default,\n    .tui-image-editor-help-menu use.normal.use-default {\n        fill-rule: evenodd;\n        fill: " + menuIconStyle.normal.color + ";\n        stroke: " + menuIconStyle.normal.color + ";\n    }\n    .tui-image-editor-menu use.active.use-default,\n    .tui-image-editor-help-menu use.active.use-default {\n        fill-rule: evenodd;\n        fill: " + menuIconStyle.active.color + ";\n        stroke: " + menuIconStyle.active.color + ";\n    }\n    .tui-image-editor-menu use.hover.use-default,\n    .tui-image-editor-help-menu use.hover.use-default {\n        fill-rule: evenodd;\n        fill: " + menuIconStyle.hover.color + ";\n        stroke: " + menuIconStyle.hover.color + ";\n    }\n    .tui-image-editor-menu use.disabled.use-default,\n    .tui-image-editor-help-menu use.disabled.use-default {\n        fill-rule: evenodd;\n        fill: " + menuIconStyle.disabled.color + ";\n        stroke: " + menuIconStyle.disabled.color + ";\n    }\n    .tui-image-editor-submenu use.normal.use-default {\n        fill-rule: evenodd;\n        fill: " + submenuIconStyle.normal.color + ";\n        stroke: " + submenuIconStyle.normal.color + ";\n    }\n    .tui-image-editor-submenu use.active.use-default {\n        fill-rule: evenodd;\n        fill: " + submenuIconStyle.active.color + ";\n        stroke: " + submenuIconStyle.active.color + ";\n    }\n";
 };
 
 /***/ }),
@@ -25369,7 +25370,7 @@ var Text = function (_Submenu) {
       italic: false,
       underline: false
     };
-    _this.align = 'left';
+    _this.align = 'tie-text-align-left';
     _this._els = {
       textEffectButton: _this.selector('.tie-text-effect-button'),
       textAlignButton: _this.selector('.tie-text-align-button'),
@@ -25484,7 +25485,7 @@ var Text = function (_Submenu) {
       this.setEffectState('italic', fontStyle);
       this.setEffectState('bold', fontWeight);
       this.setEffectState('underline', textDecoration);
-      this.setAlignState(textAlign);
+      this.setAlignState('tie-text-align-' + textAlign);
     }
   }, {
     key: 'setEffectState',
@@ -25543,14 +25544,15 @@ var Text = function (_Submenu) {
       var button = event.target.closest('.tui-image-editor-button');
       if (button) {
         var styleType = this.getButtonType(button, ['left', 'center', 'right']);
+        var styleTypeAlias = 'tie-text-align-' + styleType;
 
         event.currentTarget.classList.remove(this.align);
-        if (this.align !== styleType) {
-          event.currentTarget.classList.add(styleType);
+        if (this.align !== styleTypeAlias) {
+          event.currentTarget.classList.add(styleTypeAlias);
         }
         this.actions.changeTextStyle({ textAlign: styleType });
 
-        this.align = styleType;
+        this.align = styleTypeAlias;
       }
     }
 
